@@ -8,11 +8,15 @@ class UsersController < ApplicationController
   end
 
   def create
+    # create a new user model with the parameters from user_params
     @user = User.new(user_params)
     if @user.save
+      log_in @user
       flash[:success] = "Welcome to the Sample App"
       redirect_to @user
     else
+      # invalid / does not save user. Go back to the sign up page
+      # automatically display the problems in the header partial for /new
       render 'new'
     end
   end

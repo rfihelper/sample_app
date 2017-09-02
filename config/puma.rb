@@ -8,7 +8,7 @@ workers Integer(ENV['WEB-CONCURRENCY'] || 2)
 threads_count = Integer(ENV['RAILS_MAX_THREADS'] || 5)
 threads threads_count, threads_count
 
-preload-app!
+#preload-app!
 rackup      DefaultRackup
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
