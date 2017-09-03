@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   attr_accessor :remember_token       # create an accessible attribute
 
-  before_save { self.email = email.downcase }
+  before_save { self.email = email.downcase }   # callback, like a trigger
 
   validates :name, presence: true, length: {maximum: 50}
 
@@ -10,7 +10,8 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
 
-  validates :password, presence: true, length: { minimum: 6 }
+  # the allow_nil is for updates; has_secure_password catches nil passwords
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   has_secure_password
 
