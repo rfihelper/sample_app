@@ -46,7 +46,7 @@ class UsersController < ApplicationController
 
   # action to show all users
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.where(activated: true).paginate(page: params[:page])
   end
 
   # action to delete users
