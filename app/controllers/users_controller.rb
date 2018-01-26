@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # display the user profile page
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts.paginate(page: params[:page])
   end
 
   # action when the sign up page is submitted
@@ -60,15 +61,6 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
-    end
-
-    # confirms a logged in user
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:danger] = 'Please log in'
-        redirect_to login_url
-      end
     end
 
     def correct_user
